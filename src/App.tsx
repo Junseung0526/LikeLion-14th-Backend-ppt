@@ -1,44 +1,83 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Library } from './components/Library'
 import { PresenterPage } from './components/PresenterPage'
 import { SlideDeck } from './components/SlideDeck'
 import { lectureDecks } from './data/decks'
 import './App.css'
 
-function App() {
-  const isPresenterPath = window.location.pathname === '/presenter'
-  const [selectedDeckId, setSelectedDeckId] = useState<string | null>(
-    isPresenterPath ? lectureDecks[0]?.id ?? null : null,
-  )
-  const selectedDeck = useMemo(
-    () => lectureDecks.find((deck) => deck.id === selectedDeckId) ?? null,
-    [selectedDeckId],
-  )
+type Route =
+  | { kind: 'library' }
+  | { kind: 'deck'; deckId: string }
+  | { kind: 'presenter'; deckId: string }
 
-  if (isPresenterPath && selectedDeck) {
+const DEFAULT_DECK_ID = lectureDecks[0]?.id ?? 'spring-boot-crud'
+
+function normalizeHash(hash: string) {
+  return hash.replace(/^#\/?/, '').trim()
+}
+
+function getRoute(): Route {
+  const hash = normalizeHash(window.location.hash)
+  if (!hash) {
+    return { kind: 'library' }
+  }
+
+  if (hash === 'presenter') {
+    return { kind: 'presenter', deckId: DEFAULT_DECK_ID }
+  }
+
+  return { kind: 'deck', deckId: hash }
+}
+
+function pushRoute(path: string) {
+  window.location.hash = `/${path}`.replace(/\/+$/, '')
+}
+
+function App() {
+  const [route, setRoute] = useState<Route>(() => getRoute())
+  const defaultDeck = lectureDecks[0]
+
+  useEffect(() => {
+    const onHashChange = () => setRoute(getRoute())
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
+  const selectedDeck =
+    route.kind === 'library'
+      ? null
+      : lectureDecks.find((deck) => deck.id === route.deckId) ?? defaultDeck ?? null
+
+  if (route.kind === 'presenter') {
     return (
       <PresenterPage
-        deck={selectedDeck}
+        deck={selectedDeck ?? defaultDeck!}
         onBack={() => {
-          window.history.pushState(null, '', '/')
-          setSelectedDeckId(null)
+          pushRoute('')
         }}
       />
     )
   }
 
-  if (selectedDeck) {
+  if (route.kind === 'deck') {
     return (
       <SlideDeck
-        deck={selectedDeck}
+        deck={selectedDeck ?? defaultDeck!}
         onBack={() => {
-          setSelectedDeckId(null)
+          pushRoute('')
         }}
       />
     )
   }
 
-  return <Library decks={lectureDecks} onSelectDeck={setSelectedDeckId} />
+  return (
+    <Library
+      decks={lectureDecks}
+      onSelectDeck={(deckId) => {
+        pushRoute(deckId)
+      }}
+    />
+  )
 }
 
 export default App
