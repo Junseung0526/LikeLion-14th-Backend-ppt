@@ -38,6 +38,21 @@ function App() {
   const defaultDeck = lectureDecks[0]
 
   useEffect(() => {
+    const deckTitle = defaultDeck?.title ?? 'Spring Boot CRUD'
+    if (route.kind === 'presenter') {
+      document.title = `발표자 | LIKELION 14기 | ${deckTitle}`
+      return
+    }
+
+    if (route.kind === 'deck') {
+      document.title = `${deckTitle} | LIKELION 14기`
+      return
+    }
+
+    document.title = 'LIKELION 14기 | Spring Boot CRUD'
+  }, [defaultDeck, route.kind])
+
+  useEffect(() => {
     const onHashChange = () => setRoute(getRoute())
     window.addEventListener('hashchange', onHashChange)
     return () => window.removeEventListener('hashchange', onHashChange)
