@@ -12,12 +12,14 @@ export const springBootCrudDeck: LectureDeck = {
         'Spring Web, Spring Data JPA, H2 Database를 사용해서 REST API 구조의 게시판 백엔드를 구현합니다.',
       visual: 'overview',
       checklist: ['Create', 'Read', 'Update', 'Delete', 'CORS', 'Swagger'],
+      tip: '학습 목표를 명확히 하고, 오늘 결과물을 Swagger로 직접 보여주며 시작하세요.',
     },
     {
       eyebrow: 'Beginner',
       title: '처음 보는 용어 먼저 정리',
       summary:
         '초보자는 코드보다 용어가 먼저 익숙해져야 합니다. 오늘 자주 나오는 단어를 간단히 정리하고 시작합니다.',
+      visual: 'terms',
       bullets: [
         'REST API: 주소와 Method로 기능을 구분하는 방식',
         'Entity: DB 테이블을 Java 클래스로 옮긴 것',
@@ -25,10 +27,12 @@ export const springBootCrudDeck: LectureDeck = {
         'Service: 실제 동작 순서를 처리하는 곳',
         'Repository: DB와 직접 연결되는 곳',
       ],
+      tip: '초보자는 용어에서 막힙니다. 비유를 들어 최대한 쉽게 설명하고 넘어가세요.',
     },
     {
       eyebrow: 'Goal',
       title: '오늘 완성할 기능',
+      visual: 'goals',
       bullets: [
         '게시글 작성: 제목, 작성자, 내용을 받아 저장',
         '게시글 목록 조회: 저장된 게시글 전체를 JSON으로 응답',

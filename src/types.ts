@@ -1,4 +1,4 @@
-export type SlideVisual = 'overview' | 'layers' | 'swagger'
+export type SlideVisual = 'overview' | 'layers' | 'swagger' | 'terms' | 'goals'
 
 export type Slide = {
   eyebrow: string
@@ -16,6 +16,7 @@ export type Slide = {
     rows: string[][]
   }
   checklist?: string[]
+  tip?: string
 }
 
 export type LectureDeck = {

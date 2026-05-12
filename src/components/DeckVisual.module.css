@@ -1,0 +1,40 @@
+.deckVisual {
+  width: 100%;
+  max-height: 330px;
+  display: block;
+  margin: 0 auto;
+}
+
+.svgBg {
+  fill: #fffdfa;
+}
+
+.svgTitle {
+  fill: #1a202c;
+  font-family: var(--sans);
+  font-weight: 850;
+  font-size: 18px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.deckVisual g {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.layerActive {
+  filter: drop-shadow(0 4px 12px rgba(245, 130, 32, 0.15));
+}
+
+@keyframes subtlePulse {
+  0% { stroke-width: 2; }
+  50% { stroke-width: 3; }
+  100% { stroke-width: 2; }
+}
+
+.layerActive {
+  animation: subtlePulse 2s infinite ease-in-out;
+}

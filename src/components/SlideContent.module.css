@@ -1,0 +1,166 @@
+.slide {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(400px, 1fr) minmax(400px, 1fr);
+  gap: 34px;
+  align-content: center;
+  min-height: 0;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: clamp(22px, 3.4vw, 44px) clamp(28px, 5vw, 72px);
+  background:
+    linear-gradient(90deg, rgba(255, 253, 250, 0.62), rgba(255, 253, 250, 0.2));
+  animation: softScale 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.slideWithCode {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, auto);
+  gap: 18px;
+}
+
+.slideWithCode .slideCopy,
+.slideWithCode .summary,
+.slideWithCode .bullets {
+  max-width: 1040px;
+}
+
+.slideCopy {
+  min-width: 0;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  animation: slideUp 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.title {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(30px, 4vw, 52px);
+  font-weight: 850;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  color: var(--lion);
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.summary {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: clamp(16px, 1.8vw, 21px);
+  line-height: 1.68;
+  font-weight: 500;
+}
+
+.bullets {
+  display: grid;
+  gap: 12px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bullets li {
+  position: relative;
+  padding-left: 28px;
+  color: #2d3748;
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.68;
+  font-weight: 600;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  animation: slideUp 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--forest);
+}
+
+.visualPanel {
+  display: grid;
+  gap: 22px;
+  align-self: center;
+  min-width: 0;
+  animation: slideUp 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.checkGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.checkGrid span {
+  min-height: 48px;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  background: var(--surface);
+  box-sizing: border-box;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  animation: slideUp 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: all 160ms ease;
+  font-weight: 600;
+}
+
+.checkGrid span:hover {
+  border-color: #b8c7dd;
+  box-shadow: 0 12px 28px rgba(23, 32, 51, 0.08);
+  transform: translateY(-2px);
+}
+
+.checkGrid span::before {
+  content: '✓';
+  margin-right: 8px;
+  color: #2e9d74;
+  font-weight: 800;
+}
+
+.tableWrap {
+  grid-column: 1 / -1;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  align-self: center;
+  animation: slideUp 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.codePanelWrap {
+  width: 100%;
+  align-self: stretch;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes softScale {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (max-width: 1080px) {
+  .slide {
+    grid-template-columns: 1fr;
+    align-content: start;
+    padding-top: 26px;
+  }
+}

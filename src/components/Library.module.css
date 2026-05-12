@@ -1,0 +1,110 @@
+.library {
+  min-height: 100svh;
+  padding: clamp(28px, 6vw, 72px);
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 16% 12%, rgba(47, 125, 92, 0.13), transparent 28%),
+    radial-gradient(circle at 82% 10%, rgba(245, 130, 32, 0.16), transparent 26%),
+    var(--page);
+}
+
+.libraryHero {
+  max-width: 860px;
+  padding-top: 36px;
+}
+
+.cohortBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  margin-bottom: 18px;
+  border: 1px solid #f4cfaf;
+  border-radius: 999px;
+  color: #9a4c0f;
+  background: #fff4e7;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.deckList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  max-width: 980px;
+  margin-top: 44px;
+}
+
+.deckCard {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  min-height: 132px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  background: var(--surface);
+  text-align: left;
+  box-shadow: 0 18px 44px rgba(36, 52, 71, 0.08);
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.deckCard:hover {
+  border-color: rgba(245, 130, 32, 0.48);
+  box-shadow: 0 22px 54px rgba(36, 52, 71, 0.12);
+  transform: translateY(-3px);
+}
+
+.deckCard strong,
+.deckCard small {
+  display: block;
+}
+
+.deckCard strong {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.deckCard small {
+  margin-top: 8px;
+  color: var(--muted);
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+.deckCard em {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--forest);
+  font-style: normal;
+  font-weight: 800;
+}
+
+.deckCardMark {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 9px;
+  color: white;
+  font-weight: 900;
+  background: var(--navy);
+}
+
+.deckCardMark.muted {
+  color: #7b8798;
+  background: #edf1f6;
+}
+
+.mutedCard {
+  cursor: default;
+  opacity: 0.72;
+}

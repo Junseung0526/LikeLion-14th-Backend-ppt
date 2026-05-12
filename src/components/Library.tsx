@@ -1,5 +1,6 @@
 import { ArrowRight, Plus, Server } from 'lucide-react'
 import type { LectureDeck } from '../types'
+import styles from './Library.module.css'
 
 type LibraryProps = {
   decks: LectureDeck[]
@@ -8,9 +9,9 @@ type LibraryProps = {
 
 export function Library({ decks, onSelectDeck }: LibraryProps) {
   return (
-    <main className="library">
-      <section className="library-hero">
-        <span className="cohort-badge">LIKELION 14기</span>
+    <main className={styles.library}>
+      <section className={styles.libraryHero}>
+        <span className={styles.cohortBadge}>LIKELION 14기</span>
         <p className="eyebrow">Study Session</p>
         <h1>스터디 자료 선택</h1>
         <p className="summary">
@@ -19,15 +20,15 @@ export function Library({ decks, onSelectDeck }: LibraryProps) {
         </p>
       </section>
 
-      <section className="deck-list" aria-label="강의 자료 목록">
+      <section className={styles.deckList} aria-label="강의 자료 목록">
         {decks.map((deck) => (
           <button
-            className="deck-card"
+            className={styles.deckCard}
             key={deck.id}
             onClick={() => onSelectDeck(deck.id)}
             type="button"
           >
-            <span className="deck-card-mark">
+            <span className={styles.deckCardMark}>
               <Server aria-hidden="true" size={25} />
             </span>
             <span>
@@ -41,8 +42,8 @@ export function Library({ decks, onSelectDeck }: LibraryProps) {
           </button>
         ))}
 
-        <div className="deck-card muted-card" aria-hidden="true">
-          <span className="deck-card-mark muted">
+        <div className={`${styles.deckCard} ${styles.mutedCard}`} aria-hidden="true">
+          <span className={`${styles.deckCardMark} ${styles.muted}`}>
             <Plus aria-hidden="true" size={23} />
           </span>
           <span>
