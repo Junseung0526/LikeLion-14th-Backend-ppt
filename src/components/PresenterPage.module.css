@@ -48,6 +48,13 @@
   border-radius: 8px;
   color: white;
   background: var(--navy);
+  flex-shrink: 0;
+}
+
+.brand > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 .brand strong {
@@ -55,6 +62,7 @@
   line-height: 1.2;
   font-size: 15px;
   font-weight: 850;
+  overflow-wrap: break-word;
 }
 
 .brand small {
