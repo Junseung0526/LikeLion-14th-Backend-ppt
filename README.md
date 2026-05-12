@@ -44,6 +44,11 @@ npm run build
 3. Spring Data JPA를 이용한 영속성 계층 구현
 4. REST API 명세 작성 및 CRUD 기능 완성
 
+### Presenter Mode
+발표 진행자를 위한 전용 대본과 타이머 기능을 제공합니다.
+- **비밀번호**: `likelion2026`
+- **접근 방법**: 슬라이드 화면 왼쪽 사이드바 하단의 '발표 대본' 클릭 또는 URL 뒤에 `/presenter` 추가
+
 ---
 
 멋쟁이사자처럼 14기 연암공과대학교

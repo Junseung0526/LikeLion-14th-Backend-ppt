@@ -1,0 +1,148 @@
+.authPage {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--page);
+  padding: 24px;
+}
+
+.authCard {
+  width: 100%;
+  max-width: 380px;
+  background: var(--surface);
+  padding: 40px 32px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  animation: slideUp 0.5s ease-out;
+}
+
+.iconWrapper {
+  display: inline-flex;
+  padding: 16px;
+  background: var(--navy);
+  color: white;
+  border-radius: 50%;
+  margin-bottom: 24px;
+}
+
+.authCard h1 {
+  font-size: 24px;
+  font-weight: 850;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+
+.authCard p {
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 32px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.inputGroup {
+  position: relative;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 12px 14px 12px 42px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 15px;
+  background: var(--surface-soft);
+  transition: all 0.2s;
+  caret-color: var(--navy);
+}
+
+.inputGroup input:focus {
+  outline: none;
+  border-color: var(--navy);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(36, 52, 71, 0.1);
+}
+
+.inputGroup input.inputError {
+  border-color: #ef4444;
+  background: #fffafa;
+}
+
+.inputGroup input.inputWithToggle {
+  padding-right: 42px;
+}
+
+.toggleVisibility {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.toggleVisibility:hover {
+  color: var(--ink);
+}
+
+.errorMsg {
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: -8px;
+  font-weight: 600;
+}
+
+.submitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: var(--navy);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.submitButton:hover {
+  background: #1a2635;
+  transform: translateY(-1px);
+}
+
+.backLink {
+  margin-top: 24px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.backLink:hover {
+  color: var(--ink);
+}

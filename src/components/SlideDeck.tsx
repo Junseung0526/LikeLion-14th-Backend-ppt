@@ -9,6 +9,7 @@ import {
   Server,
   Maximize,
   Minimize,
+  Presentation,
 } from 'lucide-react'
 import { SlideContent } from './SlideContent'
 import type { LectureDeck } from '../types'
@@ -118,6 +119,15 @@ export function SlideDeck({ deck, onBack }: SlideDeckProps) {
             </button>
           ))}
         </nav>
+
+        <button 
+          className={styles.presenterLink} 
+          onClick={() => window.location.hash = `#/${deck.id}/presenter`} 
+          type="button"
+          title="Presenter Mode"
+        >
+          <Presentation aria-hidden="true" size={14} />
+        </button>
       </aside>
 
       <section className={styles.stage} aria-live="polite">
