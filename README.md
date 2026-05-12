@@ -3,7 +3,7 @@
 
 본 프로젝트는 멋쟁이사자처럼 14기 연암공과대학교 백엔드 파트의 Spring Boot CRUD 기초 발표를 위한 인터랙티브 웹 발표 자료입니다.
 
----
+##
 
 ### Overview
 - 소속: 멋쟁이사자처럼 14기 연암공과대학교
@@ -49,8 +49,10 @@ npm run build
 - **비밀번호**: `likelion2026`
 - **접근 방법**: 슬라이드 화면 왼쪽 사이드바 하단의 '발표 대본' 클릭 또는 URL 뒤에 `/presenter` 추가
 
----
+##
 
-멋쟁이사자처럼 14기 연암공과대학교
-LIKELION AT YONAM INSTITUTE OF TECHNOLOGY
-Copyright 2026. LIKELION YONAM All rights reserved.
+<p align="center">
+  <b>멋쟁이사자처럼 14기 연암공과대학교</b><br>
+  <strong>LIKELION AT YONAM INSTITUTE OF TECHNOLOGY</strong><br>
+  <sub>Copyright 2026. LIKELION YONAM All rights reserved.</sub>
+</p>
