@@ -16,43 +16,119 @@
     'Malgun Gothic', Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
     'Segoe UI', sans-serif;
 
-  font-family: var(--sans);
-  color: var(--ink);
-  background: var(--page);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 150ms var(--ease-in-out);
+  --transition-slow: 400ms var(--ease-out-expo);
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pageSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-30px) scale(1.02);
+  }
+}
+
+.page-enter {
+  animation: pageSlideIn 600ms var(--ease-out-expo) forwards;
+}
+
+.page-exit {
+  animation: pageSlideOut 400ms var(--ease-in-out) forwards;
+}
+
+.transition-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--navy);
+  z-index: 9999;
+  transform: translateY(100%);
+  pointer-events: none;
+}
+
+@keyframes curtainUp {
+  0% { transform: translateY(100%); }
+  40% { transform: translateY(0); }
+  60% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+.curtain-active {
+  animation: curtainUp 800ms cubic-bezier(0.85, 0, 0.15, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slideUpFade var(--transition-slow) forwards;
+}
+
+.animate-fade {
+  animation: fadeIn var(--transition-fast) forwards;
+}
+
+.animate-scale {
+  animation: scaleIn var(--transition-slow) forwards;
 }
 
 * {
   box-sizing: border-box;
 }
 
-/* Global Scrollbar Behavior (Resetting the "hide all" rule) */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #d1d5db transparent;
-}
-
-*::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-*::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-*::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 10px;
-}
-
-/* Re-hide scrollbars where explicitly requested if needed, but allow global ones */
-
 html {
   scroll-behavior: smooth;
+  color: var(--ink);
+  background: var(--page);
+  font-family: var(--sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
