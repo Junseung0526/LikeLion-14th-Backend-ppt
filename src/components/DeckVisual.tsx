@@ -301,7 +301,7 @@ export function DeckVisual({ type, terms }: DeckVisualProps) {
             { label: 'Robust', angle: 144 },
             { label: 'OOP', angle: 216 },
             { label: 'Scale', angle: 288 },
-          ].map((item, i) => {
+          ].map((item) => {
             const rad = (item.angle * Math.PI) / 180
             const x = Math.cos(rad) * 90
             const y = Math.sin(rad) * 90
@@ -350,7 +350,6 @@ export function DeckVisual({ type, terms }: DeckVisualProps) {
           <rect fill="#243447" height="35" rx="17.5" width="100" x="320" y="150" />
           <text fill="#fff" fontSize="12" fontWeight="800" textAnchor="middle" x="370" y="172">Try it out</text>
         </g>
-      </g>
     </svg>
   )
 }
