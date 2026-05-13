@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { EyeOff, Home, Server, Timer, RotateCcw, PanelLeftClose, PanelLeftOpen } from 'lucide-react'
+import { EyeOff, Home, Timer, RotateCcw, PanelLeftClose, PanelLeftOpen } from 'lucide-react'
 import { SlideContent } from './SlideContent'
 import type { LectureDeck } from '../types'
 import styles from './PresenterPage.module.css'
@@ -55,16 +55,30 @@ export function PresenterPage({ deck, onBack }: PresenterPageProps) {
   return (
     <main className={sidebarOpen ? styles.presenterPage : `${styles.presenterPage} ${styles.sidebarCollapsed}`}>
       <aside className={styles.presenterNav} aria-label="발표자 슬라이드 목록">
-        <div className={styles.brand}>
-          <span className={styles.brandMark}>
-            <Server aria-hidden="true" size={23} />
-          </span>
-          <div>
-            <small>LIKELION 14기</small>
-            <strong>스터디 진행자</strong>
-            <small>{deck.title} 대본</small>
+        <button className={styles.brandLink} onClick={onBack}>
+          <div className={styles.brand}>
+            <span className={styles.brandMark}>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                width="24"
+                height="24"
+              >
+                <path d="M12 2L4 9l2 11h12l2-11-8-7z" />
+                <path d="M8 11l4-2 4 2-4 6-4-6z" />
+              </svg>
+            </span>
+            <div>
+              <small>LIKELION 14기</small>
+              <strong>스터디 진행자</strong>
+              <small>{deck.title} 대본</small>
+            </div>
           </div>
-        </div>
+        </button>
         
         <div className={styles.presenterTimer}>
           <div className={styles.timerDisplay}>
