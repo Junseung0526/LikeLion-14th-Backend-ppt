@@ -6,7 +6,6 @@ import {
   Home,
   PanelLeftClose,
   PanelLeftOpen,
-  Server,
   Maximize,
   Minimize,
   Presentation,
@@ -78,16 +77,30 @@ export function SlideDeck({ deck, onBack }: SlideDeckProps) {
   return (
     <main className={sidebarOpen ? styles.deck : `${styles.deck} ${styles.sidebarCollapsed}`}>
       <aside className={styles.sidebar} aria-label="강의 목차">
-        <div className={styles.brand}>
-          <span className={styles.brandMark}>
-            <Server aria-hidden="true" size={23} />
-          </span>
-          <div>
-            <small>LIKELION 14기</small>
-            <strong>{deck.title}</strong>
-            <small>스터디 세션</small>
+        <button className={styles.brandLink} onClick={onBack}>
+          <div className={styles.brand}>
+            <span className={styles.brandMark}>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                width="24"
+                height="24"
+              >
+                <path d="M12 2L4 9l2 11h12l2-11-8-7z" />
+                <path d="M8 11l4-2 4 2-4 6-4-6z" />
+              </svg>
+            </span>
+            <div>
+              <small>LIKELION 14기</small>
+              <strong>{deck.title}</strong>
+              <small>2026 스터디 세션</small>
+            </div>
           </div>
-        </div>
+        </button>
         <button
           className={styles.collapseButton}
           aria-label={sidebarOpen ? '목차 접기' : '목차 열기'}
@@ -142,7 +155,22 @@ export function SlideDeck({ deck, onBack }: SlideDeckProps) {
             <BookOpen aria-hidden="true" size={17} />
             <span>목차</span>
           </button>
-          <span className={styles.topbarCohort}>LIKELION 14기</span>
+          <button className={styles.topbarLogo} onClick={onBack}>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              width="18"
+              height="18"
+            >
+              <path d="M12 2L4 9l2 11h12l2-11-8-7z" />
+              <path d="M8 11l4-2 4 2-4 6-4-6z" />
+            </svg>
+            <span className={styles.topbarCohort}>LIKELION 14기 (2026)</span>
+          </button>
           <div className={styles.progress} aria-label={`진행률 ${progress}%`}>
             <i style={{ width: `${progress}%` }} />
           </div>

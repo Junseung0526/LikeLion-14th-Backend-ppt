@@ -31,7 +31,38 @@
   gap: 12px;
   align-items: center;
   padding: 8px 8px 22px;
+  text-align: left;
+}
+
+.brandLink {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
   border-bottom: 1px solid var(--line);
+  background: none;
+  cursor: pointer;
+  transition: transform 200ms ease;
+}
+
+.brandLink:hover {
+  transform: translateX(4px);
+}
+
+.topbarLogo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--lion);
+  transition: transform 200ms ease;
+}
+
+.topbarLogo:hover {
+  transform: scale(1.05);
 }
 
 .brandMark {
@@ -42,6 +73,11 @@
   border-radius: 8px;
   color: white;
   background: var(--navy);
+  transition: background-color 200ms ease;
+}
+
+.brandLink:hover .brandMark {
+  background: var(--lion);
 }
 
 .sidebarCollapsed .sidebar {
