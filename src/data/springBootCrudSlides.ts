@@ -145,6 +145,9 @@ export const springBootCrudDeck: LectureDeck = {
         title: 'entity/Board.java',
         language: 'java',
         body: `@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Board {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -170,12 +173,14 @@ public class Board {
       code: {
         title: 'dto/BoardRequest.java / BoardResponse.java',
         language: 'java',
-        body: `public class BoardRequest {
+        body: `@Getter
+public class BoardRequest {
     private String title;
     private String writer;
     private String content;
 }
 
+@Setter
 public class BoardResponse {
     private Long id;
     private String title;
@@ -214,6 +219,7 @@ public class BoardResponse {
         language: 'java',
         body: `@Service
 @Transactional
+@RequiredArgsConstructor
 public class BoardService {
     private final BoardRepository boardRepository;
 
@@ -272,6 +278,7 @@ public void delete(Long id) {
         language: 'java',
         body: `@RestController
 @RequestMapping("/api/boards")
+@RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
 
