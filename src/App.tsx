@@ -57,14 +57,15 @@ function App() {
   const defaultDeck = lectureDecks[0]
 
   useEffect(() => {
-    const deckTitle = defaultDeck?.title ?? 'Spring Boot CRUD'
     if (route.kind === 'presenter') {
-      document.title = `발표자 | LIKELION 14기 | ${deckTitle}`
+      const deck = lectureDecks.find(d => d.id === route.deckId)
+      document.title = `발표자 | LIKELION 14기 | ${deck?.title ?? ''}`
       return
     }
 
     if (route.kind === 'deck') {
-      document.title = `${deckTitle} | LIKELION 14기`
+      const deck = lectureDecks.find(d => d.id === route.deckId)
+      document.title = `${deck?.title ?? ''} | LIKELION 14기`
       return
     }
 
@@ -73,8 +74,8 @@ function App() {
       return
     }
 
-    document.title = 'LIKELION 14기 | Spring Boot CRUD'
-  }, [defaultDeck, route.kind])
+    document.title = 'LIKELION 14기 | 강의 라이브러리'
+  }, [route])
 
   useEffect(() => {
     const onHashChange = () => {

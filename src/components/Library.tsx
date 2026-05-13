@@ -1,4 +1,4 @@
-import { ArrowRight, Plus, Server } from 'lucide-react'
+import { ArrowRight, Plus, Server, Code, Box, Layers, GitBranch, Database } from 'lucide-react'
 import type { LectureDeck } from '../types'
 import styles from './Library.module.css'
 
@@ -6,6 +6,15 @@ type LibraryProps = {
   decks: LectureDeck[]
   onSelectDeck: (deckId: string) => void
   currentDeckId?: string
+}
+
+function getDeckIcon(deckId: string) {
+  if (deckId.includes('crud')) return <Database aria-hidden="true" size={25} />
+  if (deckId.includes('syntax')) return <Code aria-hidden="true" size={25} />
+  if (deckId.includes('oop')) return <Box aria-hidden="true" size={25} />
+  if (deckId.includes('advanced')) return <Layers aria-hidden="true" size={25} />
+  if (deckId.includes('git')) return <GitBranch aria-hidden="true" size={25} />
+  return <Server aria-hidden="true" size={25} />
 }
 
 export function Library({ decks, onSelectDeck, currentDeckId }: LibraryProps) {
@@ -31,20 +40,20 @@ export function Library({ decks, onSelectDeck, currentDeckId }: LibraryProps) {
               type="button"
             >
               <span className={styles.deckCardMark}>
-                <Server aria-hidden="true" size={25} />
+                {getDeckIcon(deck.id)}
               </span>
               <span>
                 <div className={styles.titleRow}>
                   <strong>{deck.title}</strong>
                   {isCurrent && (
-                    <span className={styles.currentBadge}>이번 주 진행 강의</span>
+                    <span className={styles.currentBadge}>진행 중</span>
                   )}
                 </div>
                 <small>{deck.description}</small>
               </span>
               <em>
                 <ArrowRight aria-hidden="true" size={18} />
-                열기
+                강의 시작
               </em>
             </button>
           )
@@ -56,7 +65,7 @@ export function Library({ decks, onSelectDeck, currentDeckId }: LibraryProps) {
           </span>
           <span>
             <strong>다음 자료</strong>
-            <small>추가 강의 자료를 data 폴더에 연결할 수 있습니다.</small>
+            <small>새로운 실습 주제가 곧 추가될 예정입니다.</small>
           </span>
         </div>
       </section>

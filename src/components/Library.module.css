@@ -9,8 +9,15 @@
 }
 
 .libraryHero {
-  max-width: 860px;
-  padding-top: 36px;
+  max-width: 960px;
+  padding: 60px 0 20px;
+}
+
+.libraryHero h1 {
+  font-size: clamp(32px, 5vw, 48px);
+  margin: 12px 0 24px;
+  letter-spacing: -0.02em;
+  font-weight: 900;
 }
 
 .cohortBadge {
@@ -18,7 +25,7 @@
   align-items: center;
   min-height: 34px;
   padding: 0 12px;
-  margin-bottom: 18px;
+  margin-bottom: 8px;
   border: 1px solid #f4cfaf;
   border-radius: 999px;
   color: #9a4c0f;
@@ -29,63 +36,35 @@
 
 .deckList {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-  max-width: 980px;
-  margin-top: 44px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 1200px;
+  margin-top: 60px;
 }
 
 .deckCard {
-  display: grid;
-  grid-template-columns: 54px minmax(0, 1fr) auto;
-  gap: 16px;
-  align-items: center;
-  min-height: 132px;
-  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 240px;
+  padding: 36px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 16px;
   color: var(--ink);
   background: var(--surface);
   text-align: left;
-  box-shadow: 0 18px 44px rgba(36, 52, 71, 0.08);
+  box-shadow: 0 10px 30px rgba(36, 52, 71, 0.05);
   cursor: pointer;
   transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
 }
 
 .deckCard:hover {
   border-color: rgba(245, 130, 32, 0.48);
-  box-shadow: 0 22px 54px rgba(36, 52, 71, 0.12);
-  transform: translateY(-3px);
-}
-
-.deckCard strong,
-.deckCard small {
-  display: block;
-}
-
-.deckCard strong {
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 1.2;
-}
-
-.deckCard small {
-  margin-top: 8px;
-  color: var(--muted);
-  line-height: 1.55;
-  font-weight: 500;
-}
-
-.deckCard em {
-  display: inline-flex;
-  gap: 6px;
-  align-items: center;
-  color: var(--forest);
-  font-style: normal;
-  font-weight: 800;
+  box-shadow: 0 20px 50px rgba(36, 52, 71, 0.1);
+  transform: translateY(-4px);
 }
 
 .deckCardMark {
@@ -93,15 +72,46 @@
   place-items: center;
   width: 54px;
   height: 54px;
-  border-radius: 9px;
+  border-radius: 12px;
   color: white;
-  font-weight: 900;
   background: var(--navy);
 }
 
 .deckCardMark.muted {
   color: #7b8798;
   background: #edf1f6;
+}
+
+.deckCard > span:nth-child(2) {
+  flex: 1;
+  margin-top: 24px;
+}
+
+.deckCard strong {
+  display: block;
+  font-size: 22px;
+  font-weight: 850;
+  line-height: 1.2;
+}
+
+.deckCard small {
+  display: block;
+  margin-top: 10px;
+  color: var(--muted);
+  line-height: 1.55;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.deckCard em {
+  margin-top: 24px;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--forest);
+  font-style: normal;
+  font-weight: 800;
+  font-size: 15px;
 }
 
 .currentCard {
@@ -113,30 +123,38 @@
 .titleRow {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .currentBadge {
-  padding: 2px 8px;
+  padding: 3px 10px;
   background: var(--lion);
   color: white;
   font-size: 11px;
   font-weight: 900;
-  border-radius: 4px;
+  border-radius: 6px;
   text-transform: uppercase;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.02em;
   animation: badgePulse 2s infinite;
 }
 
 @keyframes badgePulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba(245, 130, 32, 0.4);
+  0% { box-shadow: 0 0 0 0 rgba(245, 130, 32, 0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(245, 130, 32, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 130, 32, 0); }
+}
+
+@media (max-width: 640px) {
+  .library {
+    padding: 32px 24px;
   }
-  70% {
-    box-shadow: 0 0 0 6px rgba(245, 130, 32, 0);
+  .deckList {
+    grid-template-columns: 1fr;
+    margin-top: 40px;
   }
-  100% {
-    box-shadow: 0 0 0 0 rgba(245, 130, 32, 0);
+  .deckCard {
+    padding: 30px;
+    min-height: auto;
   }
 }
