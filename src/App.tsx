@@ -54,6 +54,7 @@ function pushRoute(path: string) {
 function App() {
   const [route, setRoute] = useState<Route>(() => getRoute())
   const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isTransitioning, setIsTransitioning] = useState(false)
   const defaultDeck = lectureDecks[0]
 
   useEffect(() => {
@@ -90,60 +91,85 @@ function App() {
     return () => window.removeEventListener('hashchange', onHashChange)
   }, [])
 
+  const startTransition = (path: string) => {
+    setIsTransitioning(true)
+    
+    // The "curtain" hits the middle at 400ms (half of 800ms)
+    setTimeout(() => {
+      pushRoute(path)
+    }, 400)
+
+    // Reset transition state after animation completes
+    setTimeout(() => {
+      setIsTransitioning(false)
+    }, 800)
+  }
+
   const selectedDeck =
     route.kind === 'library' || route.kind === 'not-found'
       ? null
       : lectureDecks.find((deck) => deck.id === route.deckId) ?? defaultDeck ?? null
 
-  if (route.kind === 'presenter') {
-    if (!isAuthenticated) {
+  const renderContent = () => {
+    if (route.kind === 'presenter') {
+      if (!isAuthenticated) {
+        return (
+          <PresenterAuth
+            onAuthenticated={() => setIsAuthenticated(true)}
+            onBack={() => startTransition(route.deckId)}
+          />
+        )
+      }
+
       return (
-        <PresenterAuth
-          onAuthenticated={() => setIsAuthenticated(true)}
-          onBack={() => pushRoute(route.deckId)}
+        <PresenterPage
+          deck={selectedDeck ?? defaultDeck!}
+          onBack={() => {
+            startTransition('')
+          }}
+        />
+      )
+    }
+
+    if (route.kind === 'deck') {
+      return (
+        <SlideDeck
+          deck={selectedDeck ?? defaultDeck!}
+          onBack={() => {
+            startTransition('')
+          }}
+        />
+      )
+    }
+
+    if (route.kind === 'not-found') {
+      return (
+        <NotFound
+          onBack={() => {
+            startTransition('')
+          }}
         />
       )
     }
 
     return (
-      <PresenterPage
-        deck={selectedDeck ?? defaultDeck!}
-        onBack={() => {
-          pushRoute('')
-        }}
-      />
-    )
-  }
-
-  if (route.kind === 'deck') {
-    return (
-      <SlideDeck
-        deck={selectedDeck ?? defaultDeck!}
-        onBack={() => {
-          pushRoute('')
-        }}
-      />
-    )
-  }
-
-  if (route.kind === 'not-found') {
-    return (
-      <NotFound
-        onBack={() => {
-          pushRoute('')
+      <Library
+        decks={lectureDecks}
+        currentDeckId={DEFAULT_DECK_ID}
+        onSelectDeck={(deckId) => {
+          startTransition(deckId)
         }}
       />
     )
   }
 
   return (
-    <Library
-      decks={lectureDecks}
-      currentDeckId={DEFAULT_DECK_ID}
-      onSelectDeck={(deckId) => {
-        pushRoute(deckId)
-      }}
-    />
+    <>
+      <div className={`page-wrapper ${isTransitioning ? 'page-exit' : 'page-enter'}`}>
+        {renderContent()}
+      </div>
+      <div className={`transition-overlay ${isTransitioning ? 'curtain-active' : ''}`} />
+    </>
   )
 }
 
