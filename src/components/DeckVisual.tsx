@@ -3,24 +3,36 @@ import styles from './DeckVisual.module.css'
 
 type DeckVisualProps = {
   type: SlideVisual
+  terms?: string[]
 }
 
-export function DeckVisual({ type }: DeckVisualProps) {
+export function DeckVisual({ type, terms }: DeckVisualProps) {
   if (type === 'terms') {
+    const displayTerms = terms?.map(t => {
+      const [label, ...descParts] = t.split(':')
+      return {
+        label: label.trim(),
+        desc: descParts.join(':').trim(),
+        color: '#3182ce' // Default color
+      }
+    }).slice(0, 4) || [
+      { label: 'REST API', desc: '주소 + Method', color: '#3182ce' },
+      { label: 'Entity', desc: 'DB 테이블 구조', color: '#38a169' },
+      { label: 'DTO', desc: '데이터 전달 박스', color: '#d69e2e' },
+      { label: 'Service', desc: '비즈니스 로직', color: '#805ad5' },
+    ]
+
+    const colors = ['#3182ce', '#38a169', '#d69e2e', '#805ad5']
+
     return (
       <svg className={styles.deckVisual} viewBox="0 0 540 330" role="img" aria-label="Key Terms">
         <rect className={styles.svgBg} height="330" rx="12" width="540" />
         <g transform="translate(40, 60)">
           <rect fill="#f8fafc" height="210" rx="12" stroke="#e2e8f0" strokeWidth="2" width="460" />
-          {[
-            { label: 'REST API', desc: '주소 + Method', color: '#3182ce' },
-            { label: 'Entity', desc: 'DB 테이블 구조', color: '#38a169' },
-            { label: 'DTO', desc: '데이터 전달 박스', color: '#d69e2e' },
-            { label: 'Service', desc: '비즈니스 로직', color: '#805ad5' },
-          ].map((term, i) => (
+          {displayTerms.map((term, i) => (
             <g key={term.label} transform={`translate(20, ${20 + i * 45})`}>
-              <rect fill={term.color} height="32" rx="6" width="100" />
-              <text fill="#fff" fontSize="12" fontWeight="800" textAnchor="middle" x="50" y="21">{term.label}</text>
+              <rect fill={term.color || colors[i % colors.length]} height="32" rx="6" width="100" />
+              <text fill="#fff" fontSize="11" fontWeight="800" textAnchor="middle" x="50" y="21">{term.label}</text>
               <text fill="#4a5568" fontSize="13" fontWeight="600" x="115" y="21">{term.desc}</text>
             </g>
           ))}
@@ -165,13 +177,152 @@ export function DeckVisual({ type }: DeckVisualProps) {
     )
   }
 
+  if (type === 'git-flow') {
+    return (
+      <svg className={styles.deckVisual} viewBox="0 0 540 330" role="img" aria-label="Git Flow">
+        <rect className={styles.svgBg} height="330" rx="12" width="540" />
+        <g transform="translate(60, 165)">
+          {/* Main line */}
+          <line stroke="#cbd5e0" strokeDasharray="4 4" strokeWidth="2" x1="0" x2="420" y1="0" y2="0" />
+          
+          {/* Main nodes */}
+          {[0, 140, 280, 420].map((x, i) => (
+            <circle key={i} cx={x} cy="0" fill="#243447" r="6" />
+          ))}
+          
+          {/* Feature branch */}
+          <path d="M140 0 Q210 -80 280 0" fill="none" stroke="#f58220" strokeWidth="3" />
+          <circle cx="210" cy="-40" fill="#f58220" r="6" />
+          
+          <text fill="#243447" fontSize="12" fontWeight="800" x="0" y="25">main</text>
+          <text fill="#f58220" fontSize="12" fontWeight="800" x="180" y="-55">feature</text>
+        </g>
+        <text fill="#1a202c" fontSize="18" fontWeight="850" textAnchor="middle" x="270" y="60">Git Branch & Merge Flow</text>
+      </svg>
+    )
+  }
+
+  if (type === 'java-box') {
+    return (
+      <svg className={styles.deckVisual} viewBox="0 0 540 330" role="img" aria-label="Java OOP">
+        <rect className={styles.svgBg} height="330" rx="12" width="540" />
+        <g transform="translate(120, 100)">
+          {/* Class (The Mold) */}
+          <rect fill="#fff" height="120" rx="8" stroke="#243447" strokeWidth="2" width="100" />
+          <text fill="#243447" fontSize="12" fontWeight="800" textAnchor="middle" x="50" y="-15">Class (설계도)</text>
+          <path d="M20 30 h60 M20 50 h60 M20 70 h60" fill="none" stroke="#edf2f7" strokeWidth="4" />
+          
+          {/* Arrow */}
+          <line stroke="#cbd5e0" strokeWidth="2" x1="110" x2="190" y1="60" y2="60" />
+          <path d="M185 55 l10 5 l-10 5" fill="none" stroke="#cbd5e0" strokeWidth="2" />
+          
+          {/* Objects (The Instances) */}
+          <g transform="translate(210, 0)">
+            <rect fill="#fff9f3" height="50" rx="6" stroke="#f58220" strokeWidth="2" width="80" />
+            <rect fill="#fff9f3" height="50" rx="6" stroke="#f58220" strokeWidth="2" width="80" y="70" />
+            <text fill="#9a4c0f" fontSize="12" fontWeight="800" textAnchor="middle" x="40" y="-15">Objects (실체)</text>
+            <text fill="#c05621" fontSize="10" fontWeight="700" textAnchor="middle" x="40" y="30">Instance 1</text>
+            <text fill="#c05621" fontSize="10" fontWeight="700" textAnchor="middle" x="40" y="100">Instance 2</text>
+          </g>
+        </g>
+      </svg>
+    )
+  }
+
+  if (type === 'stream') {
+    return (
+      <svg className={styles.deckVisual} viewBox="0 0 540 330" role="img" aria-label="Java Stream">
+        <rect className={styles.svgBg} height="330" rx="12" width="540" />
+        <g transform="translate(60, 80)">
+          {/* Source */}
+          <rect fill="#edf2f7" height="180" rx="8" width="80" />
+          <text fill="#4a5568" fontSize="11" fontWeight="800" textAnchor="middle" x="40" y="-15">Source</text>
+          {[0, 1, 2, 3].map(i => <circle key={i} cx="40" cy={30 + i * 40} fill="#cbd5e0" r="12" />)}
+          
+          {/* Pipeline */}
+          <g transform="translate(100, 90)">
+            <path d="M0 0 h240" fill="none" stroke="#f58220" strokeDasharray="6 4" strokeWidth="2" />
+            <rect fill="#f58220" height="40" rx="20" width="100" x="20" y="-20" />
+            <text fill="#fff" fontSize="10" fontWeight="800" textAnchor="middle" x="70" y="5">Filter</text>
+            
+            <rect fill="#805ad5" height="40" rx="20" width="100" x="140" y="-20" />
+            <text fill="#fff" fontSize="10" fontWeight="800" textAnchor="middle" x="190" y="5">Map</text>
+          </g>
+          
+          {/* Result */}
+          <g transform="translate(360, 0)">
+            <rect fill="#f0fff4" height="180" rx="8" width="80" />
+            <text fill="#2f855a" fontSize="11" fontWeight="800" textAnchor="middle" x="40" y="-15">Result</text>
+            {[0, 1].map(i => <circle key={i} cx="40" cy={50 + i * 80} fill="#38a169" r="12" />)}
+          </g>
+        </g>
+      </svg>
+    )
+  }
+  if (type === 'jvm') {
+    return (
+      <svg className={styles.deckVisual} viewBox="0 0 540 330" role="img" aria-label="JVM Architecture">
+        <rect className={styles.svgBg} height="330" rx="12" width="540" />
+        <g transform="translate(40, 60)">
+          {/* JDK Outer Box */}
+          <rect fill="none" height="210" rx="12" stroke="#cbd5e0" strokeDasharray="4 4" strokeWidth="2" width="460" />
+          <text fill="#718096" fontSize="12" fontWeight="800" x="10" y="-10">JDK (Development Kit)</text>
+          
+          {/* JRE Box */}
+          <g transform="translate(20, 30)">
+            <rect fill="#f8fafc" height="150" rx="10" stroke="#a0aec0" strokeWidth="2" width="420" />
+            <text fill="#4a5568" fontSize="12" fontWeight="800" x="10" y="-10">JRE (Runtime Environment)</text>
+            
+            {/* JVM Box */}
+            <g transform="translate(20, 30)">
+              <rect fill="#fff9f3" height="90" rx="8" stroke="#f58220" strokeWidth="2" width="380" />
+              <text fill="#9a4c0f" fontSize="14" fontWeight="900" textAnchor="middle" x="190" y="50">JVM (Virtual Machine)</text>
+              <text fill="#c05621" fontSize="11" fontWeight="700" textAnchor="middle" x="190" y="70">Bytecode Execution Engine</text>
+            </g>
+          </g>
+        </g>
+      </svg>
+    )
+  }
+
+  if (type === 'java-intro') {
+    return (
+      <svg className={styles.deckVisual} viewBox="0 0 540 330" role="img" aria-label="Java Introduction">
+        <rect className={styles.svgBg} height="330" rx="12" width="540" />
+        <g transform="translate(270, 165)">
+          {/* Central Sun/Java Icon style */}
+          <circle fill="#f58220" opacity="0.1" r="100" />
+          <circle fill="#f58220" opacity="0.2" r="70" />
+          
+          {/* Floating Elements */}
+          {[
+            { label: 'Security', angle: 0 },
+            { label: 'Portable', angle: 72 },
+            { label: 'Robust', angle: 144 },
+            { label: 'OOP', angle: 216 },
+            { label: 'Scale', angle: 288 },
+          ].map((item, i) => {
+            const rad = (item.angle * Math.PI) / 180
+            const x = Math.cos(rad) * 90
+            const y = Math.sin(rad) * 90
+            return (
+              <g key={item.label} transform={`translate(${x}, ${y})`}>
+                <rect fill="#fff" height="24" rx="4" stroke="#e2e8f0" width="60" x="-30" y="-12" />
+                <text fill="#2d3748" fontSize="10" fontWeight="800" textAnchor="middle" y="4">{item.label}</text>
+              </g>
+            )
+          })}
+          
+          {/* Center Logo Placeholder */}
+          <rect fill="#243447" height="40" rx="6" width="60" x="-30" y="-20" />
+          <text fill="#fff" fontSize="14" fontWeight="900" textAnchor="middle" y="5">JAVA</text>
+        </g>
+      </svg>
+    )
+  }
+
   return (
     <svg className={styles.deckVisual} viewBox="0 0 540 330" role="img" aria-label="Swagger UI">
-      <rect className={styles.svgBg} height="330" rx="12" width="540" />
-      
-      {/* Mock Browser */}
-      <g transform="translate(40, 40)">
-        <rect fill="#fff" height="250" rx="8" stroke="#e2e8f0" strokeWidth="2" width="460" />
         <rect fill="#f7fafc" height="40" rx="8" width="460" />
         <circle cx="20" cy="20" fill="#cbd5e0" r="4" />
         <circle cx="35" cy="20" fill="#cbd5e0" r="4" />

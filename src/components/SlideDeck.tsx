@@ -84,7 +84,7 @@ export function SlideDeck({ deck, onBack }: SlideDeckProps) {
           </span>
           <div>
             <small>LIKELION 14기</small>
-            <strong>Board CRUD</strong>
+            <strong>{deck.title}</strong>
             <small>스터디 세션</small>
           </div>
         </div>

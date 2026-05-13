@@ -38,7 +38,7 @@ export function SlideContent({ slide, index }: SlideContentProps) {
 
       {(slide.visual || slide.checklist) && (
         <aside className={styles.visualPanel} aria-label="시각 자료">
-          {slide.visual && <DeckVisual type={slide.visual} />}
+          {slide.visual && <DeckVisual terms={slide.bullets} type={slide.visual} />}
 
           {slide.checklist && (
             <div className={styles.checkGrid}>

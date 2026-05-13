@@ -1,4 +1,4 @@
-export type SlideVisual = 'overview' | 'layers' | 'swagger' | 'terms' | 'goals'
+export type SlideVisual = 'overview' | 'layers' | 'swagger' | 'terms' | 'goals' | 'git-flow' | 'java-box' | 'stream' | 'jvm' | 'java-intro'
 
 export type Slide = {
   eyebrow: string
