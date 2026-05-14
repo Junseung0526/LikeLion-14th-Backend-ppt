@@ -1,4 +1,4 @@
-export type SlideVisual = 'overview' | 'layers' | 'swagger' | 'terms' | 'goals' | 'git-flow' | 'java-box' | 'stream' | 'jvm' | 'java-intro' | 'websocket-flow' | 'redis-pubsub' | 'messaging-comparison' | 'stomp-concept' | 'ws-handshake' | 'ws-security' | 'web-evolution' | 'exception-flow' | 'jpa-persistence' | 'jpa-nplusone' | 'error-pyramid' | 'jpa-proxy' | 'jpa-cycle'
+export type SlideVisual = 'overview' | 'layers' | 'swagger' | 'terms' | 'goals' | 'git-flow' | 'java-box' | 'stream' | 'jvm' | 'java-intro' | 'websocket-flow' | 'redis-pubsub' | 'messaging-comparison' | 'stomp-concept' | 'ws-handshake' | 'ws-security' | 'web-evolution' | 'exception-flow' | 'jpa-persistence' | 'jpa-nplusone' | 'error-pyramid' | 'jpa-proxy' | 'jpa-cycle' | 'jpa-paradigm' | 'exception-necessity'
 
 export type Slide = {
   eyebrow: string
