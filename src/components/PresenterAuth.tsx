@@ -29,7 +29,7 @@ export function PresenterAuth({ onAuthenticated, onBack }: PresenterAuthProps) {
           <ShieldCheck size={48} />
         </div>
         <h1>진행자 인증</h1>
-        <p>발표 대본을 확인하려면 비밀번호를 입력하세요.</p>
+        <p>멋쟁이사자처럼 14기 발표자 모드로 진입합니다.</p>
         
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputGroup}>

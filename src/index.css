@@ -101,7 +101,47 @@
 }
 
 .curtain-active {
-  animation: curtainUp 800ms cubic-bezier(0.85, 0, 0.15, 1) forwards;
+  animation: curtainUp 2500ms cubic-bezier(0.85, 0, 0.15, 1) forwards;
+}
+
+.loading-tip-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 90%;
+  max-width: 600px;
+  color: white;
+  z-index: 10000;
+  animation: fadeInOut 2500ms ease-in-out forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, -40%); }
+  25% { opacity: 1; transform: translate(-50%, -50%); }
+  75% { opacity: 1; transform: translate(-50%, -50%); }
+  100% { opacity: 0; transform: translate(-50%, -60%); }
+}
+
+.loading-tip-label {
+  display: inline-block;
+  background: var(--lion);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+
+.loading-tip-text {
+  font-size: clamp(18px, 3vw, 24px);
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .animate-slide-up {
@@ -135,6 +175,11 @@ body {
   min-width: 320px;
   margin: 0;
   caret-color: transparent;
+}
+
+::selection {
+  background: var(--lion);
+  color: white;
 }
 
 button,

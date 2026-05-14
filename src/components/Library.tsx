@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { ArrowRight, Plus, Server, Code, Box, Layers, GitBranch, Database, ExternalLink, Mail } from 'lucide-react'
 import type { LectureDeck } from '../types'
 import styles from './Library.module.css'
+import univLogo from '../assets/연암공대_로고.png'
 
 type LibraryProps = {
   decks: LectureDeck[]
@@ -41,18 +42,18 @@ export function Library({ decks, onSelectDeck, currentDeckId }: LibraryProps) {
     <main className={styles.library}>
       <div className={styles.ticker}>
         <div className={styles.tickerTrack}>
-          <span>SPRING BOOT CRUD STUDY</span>
+          <span>POSSIBILITY TO REALITY</span>
           <span>LIKELION 14th</span>
-          <span>JAVA ADVANCED</span>
-          <span>GIT & GITHUB</span>
-          <span>SPRING BOOT CRUD STUDY</span>
+          <span>멋쟁이사자처럼 연암공과대학교</span>
+          <span>GROW WITH US</span>
+          <span>POSSIBILITY TO REALITY</span>
           <span>LIKELION 14th</span>
-          <span>JAVA ADVANCED</span>
-          <span>GIT & GITHUB</span>
-          <span>SPRING BOOT CRUD STUDY</span>
+          <span>멋쟁이사자처럼 연암공과대학교</span>
+          <span>GROW WITH US</span>
+          <span>POSSIBILITY TO REALITY</span>
           <span>LIKELION 14th</span>
-          <span>JAVA ADVANCED</span>
-          <span>GIT & GITHUB</span>
+          <span>멋쟁이사자처럼 연암공과대학교</span>
+          <span>GROW WITH US</span>
         </div>
       </div>
 
@@ -66,11 +67,12 @@ export function Library({ decks, onSelectDeck, currentDeckId }: LibraryProps) {
         <div className={`${styles.container} ${styles.reveal}`}>
           <div className={styles.heroContent}>
             <span className={styles.cohortBadge}>LIKELION 14기</span>
-            <p className="eyebrow">Study Session</p>
             <div className={styles.titleWrapper}>
-              <h1 className={styles.revealText}>백엔드 수업 자료</h1>
+              <h1 className={styles.revealText}>멋쟁이사자처럼<br />백엔드 스터디</h1>
             </div>
+            <p className={styles.slogan}>POSSIBILITY TO REALITY</p>
             <p className={styles.summary}>
+              내일의 가치를 만드는 코딩 공부, <br />
               함께 실습하며 볼 자료를 선택하세요.
             </p>
           </div>
@@ -111,8 +113,8 @@ export function Library({ decks, onSelectDeck, currentDeckId }: LibraryProps) {
                 <Plus aria-hidden="true" size={23} />
               </span>
               <span>
-                <strong>다음 자료</strong>
-                <small>새로운 실습 주제가 곧 추가될 예정입니다.</small>
+                <strong>다음 주제</strong>
+                <small>새로운 실습 자료가 곧 추가될 예정입니다.</small>
               </span>
             </div>
           </div>
@@ -124,29 +126,16 @@ export function Library({ decks, onSelectDeck, currentDeckId }: LibraryProps) {
         <div className={styles.footerContainer}>
           <div className={styles.footerBrand}>
             <div className={styles.footerLogo}>
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                width="24"
-                height="24"
-              >
-                <path d="M12 2L4 9l2 11h12l2-11-8-7z" />
-                <path d="M8 11l4-2 4 2-4 6-4-6z" />
-              </svg>
-              <strong>LIKELION YC</strong>
+              <img src={univLogo} alt="연암공대" className={styles.footerUnivLogo} />
             </div>
             <p>연암공과대학교 멋쟁이사자처럼 14기 스터디 허브</p>
           </div>
 
           <div className={styles.footerLinks}>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <a href="https://github.com/likelion-yit" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
               <GitBranch size={20} />
             </a>
-            <a href="mailto:contact@example.com" aria-label="Mail">
+            <a href="mailto:contact@likelion.net" aria-label="Mail">
               <Mail size={20} />
             </a>
             <a href="https://likelion.university" target="_blank" rel="noopener noreferrer" aria-label="Likelion University">
@@ -155,7 +144,7 @@ export function Library({ decks, onSelectDeck, currentDeckId }: LibraryProps) {
           </div>
 
           <div className={styles.footerBottom}>
-            <p>&copy; 2026 LIKELION YIT 14th. All rights reserved.</p>
+            <p>&copy; 2026 LIKELION 연암공과대학교 14th. All rights reserved.</p>
           </div>
         </div>
       </footer>
