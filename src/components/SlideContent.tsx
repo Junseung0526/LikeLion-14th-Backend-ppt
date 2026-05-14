@@ -36,7 +36,7 @@ export function SlideContent({ slide, index }: SlideContentProps) {
         )}
       </div>
 
-      {(slide.visual || slide.checklist) && (
+      {(slide.visual || slide.checklist) && !isCodeSlide && (
         <aside className={styles.visualPanel} aria-label="시각 자료">
           {slide.visual && <DeckVisual terms={slide.bullets} type={slide.visual} />}
 

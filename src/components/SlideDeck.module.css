@@ -24,6 +24,12 @@
   border-right: 1px solid var(--line);
   background: rgba(255, 253, 250, 0.96);
   box-sizing: border-box;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
 
 .brand {

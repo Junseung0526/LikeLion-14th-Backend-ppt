@@ -1,4 +1,4 @@
-export type SlideVisual = 'overview' | 'layers' | 'swagger' | 'terms' | 'goals' | 'git-flow' | 'java-box' | 'stream' | 'jvm' | 'java-intro'
+export type SlideVisual = 'overview' | 'layers' | 'swagger' | 'terms' | 'goals' | 'git-flow' | 'java-box' | 'stream' | 'jvm' | 'java-intro' | 'websocket-flow' | 'redis-pubsub' | 'messaging-comparison' | 'stomp-concept' | 'ws-handshake' | 'ws-security' | 'web-evolution'
 
 export type Slide = {
   eyebrow: string
