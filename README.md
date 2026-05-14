@@ -2,6 +2,7 @@
 ## Backend Spring Boot CRUD Presentation
 
 본 프로젝트는 멋쟁이사자처럼 14기 연암공과대학교 백엔드 파트의 Spring Boot CRUD 기초 발표를 위한 인터랙티브 웹 발표 자료입니다.
+<img width="1901" height="917" alt="image" src="https://github.com/user-attachments/assets/783cdbd5-3b32-4d9b-aeaa-1534ec2c6ad3" />
 
 ##
 
