@@ -7,9 +7,14 @@ import { javaAdvancedDeck } from './javaAdvancedSlides'
 
 import { websocketDeck } from './websocketSlides'
 
+import { exceptionHandlingDeck } from './exceptionHandlingSlides'
+import { jpaDeepDiveDeck } from './jpaDeepDiveSlides'
+
 export const lectureDecks: LectureDeck[] = [
   springBootCrudDeck,
   websocketDeck,
+  jpaDeepDiveDeck,
+  exceptionHandlingDeck,
   javaSyntaxDeck,
   javaOOPDeck,
   javaAdvancedDeck,

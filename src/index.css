@@ -240,6 +240,17 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   cursor: crosshair; /* Fallback */
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar for a cleaner presentation experience */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 /* Custom Cursor Logic - Hide default on non-touch devices */

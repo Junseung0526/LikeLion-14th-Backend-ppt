@@ -285,6 +285,243 @@ export function DeckVisual({ type, terms }: DeckVisualProps) {
     )
   }
 
+  if (type === 'error-pyramid') {
+    return (
+      <svg className={styles.deckVisual} viewBox="0 0 540 330">
+        <rect className={styles.svgBg} height="330" rx="12" width="540" />
+        <g transform="translate(120, 60)">
+          {/* Internal Server Error */}
+          <path d="M150 0 L300 210 L0 210 Z" fill="#f8fafc" stroke="#cbd5e0" strokeWidth="2" />
+          
+          <path d="M107 150 L193 150" fill="none" stroke="#cbd5e0" strokeWidth="1" />
+          <path d="M71 100 L229 100" fill="none" stroke="#cbd5e0" strokeWidth="1" />
+          <path d="M35 50 L265 50" fill="none" stroke="#cbd5e0" strokeWidth="1" />
+
+          {/* Layers */}
+          <text fill="#e53e3e" fontSize="10" fontWeight="900" textAnchor="middle" x="150" y="40">500: Unexpected</text>
+          <text fill="#d69e2e" fontSize="10" fontWeight="900" textAnchor="middle" x="150" y="90">404: Not Found</text>
+          <text fill="#3182ce" fontSize="10" fontWeight="900" textAnchor="middle" x="150" y="140">400: Bad Request</text>
+          <text fill="#38a169" fontSize="10" fontWeight="900" textAnchor="middle" x="150" y="190">200: Success</text>
+        </g>
+        <text fill="#1a202c" fontSize="16" fontWeight="900" textAnchor="middle" x="270" y="40">HTTP 상태 코드 계층 구조</text>
+      </svg>
+    )
+  }
+
+  if (type === 'jpa-paradigm') {
+    return (
+      <svg className={styles.deckVisual} viewBox="0 0 540 330">
+        <rect className={styles.svgBg} height="330" rx="12" width="540" />
+        
+        {/* Object Side */}
+        <g transform="translate(60, 80)">
+          <text fill="#2d3748" fontSize="12" fontWeight="900" x="0" y="-15">Object (Reference)</text>
+          <rect fill="#fff" height="150" rx="8" stroke="#243447" strokeWidth="2" width="120" />
+          <rect fill="#edf2f7" height="20" rx="4" width="80" x="20" y="30" />
+          <rect fill="#fff9f3" height="40" rx="4" stroke="#f58220" strokeWidth="2" width="100" x="10" y="70" />
+          <text fill="#9a4c0f" fontSize="9" fontWeight="800" textAnchor="middle" x="60" y="95">Team reference</text>
+        </g>
+
+        {/* Mismatch Icon */}
+        <g transform="translate(240, 140)">
+          <circle fill="#e53e3e" r="20" />
+          <text fill="#fff" fontSize="18" fontWeight="900" textAnchor="middle" y="7">≠</text>
+        </g>
+
+        {/* DB Side */}
+        <g transform="translate(360, 80)">
+          <text fill="#2d3748" fontSize="12" fontWeight="900" x="0" y="-15">Table (Foreign Key)</text>
+          <rect fill="#fff" height="150" rx="8" stroke="#243447" strokeWidth="2" width="120" />
+          <rect fill="#edf2f7" height="20" rx="4" width="80" x="20" y="30" />
+          <rect fill="#f8fafc" height="40" rx="4" stroke="#cbd5e0" strokeWidth="2" width="100" x="10" y="70" />
+          <text fill="#4a5568" fontSize="9" fontWeight="800" textAnchor="middle" x="60" y="95">TEAM_ID (FK)</text>
+        </g>
+        <text fill="#1a202c" fontSize="16" fontWeight="900" textAnchor="middle" x="270" y="40">패러다임의 불일치</text>
+      </svg>
+    )
+  }
+
+  if (type === 'jpa-proxy') {
+    return (
+      <svg className={styles.deckVisual} viewBox="0 0 540 330">
+        <rect className={styles.svgBg} height="330" rx="12" width="540" />
+        <g transform="translate(60, 100)">
+          {/* Proxy Object */}
+          <rect fill="#fff9f3" height="100" rx="8" stroke="#f58220" strokeDasharray="4 4" strokeWidth="3" width="140" />
+          <text fill="#9a4c0f" fontSize="12" fontWeight="900" textAnchor="middle" x="70" y="45">Proxy (가짜)</text>
+          <text fill="#c05621" fontSize="9" fontWeight="700" textAnchor="middle" x="70" y="65">ID만 가짐</text>
+          
+          {/* Arrow */}
+          <path d="M140 50 h100" fill="none" stroke="#cbd5e0" strokeWidth="2" />
+          <text fill="#718096" fontSize="9" fontWeight="800" textAnchor="middle" x="190" y="40">실제 필요할 때</text>
+
+          {/* Real Entity */}
+          <g transform="translate(240, -20)">
+            <rect fill="#fff" height="140" rx="8" stroke="#38a169" strokeWidth="2" width="160" />
+            <text fill="#2f855a" fontSize="12" fontWeight="900" textAnchor="middle" x="80" y="30">Real Entity (실체)</text>
+            <rect fill="#f0fff4" height="60" rx="4" width="120" x="20" y="50" />
+            <text fill="#2f855a" fontSize="9" fontWeight="700" textAnchor="middle" x="80" y="85">전체 데이터 포함</text>
+          </g>
+        </g>
+        <text fill="#1a202c" fontSize="18" fontWeight="900" textAnchor="middle" x="270" y="50">지연 로딩: 프록시와 초기화</text>
+      </svg>
+    )
+  }
+
+  if (type === 'jpa-cycle') {
+    return (
+      <svg className={styles.deckVisual} viewBox="0 0 540 330">
+        <rect className={styles.svgBg} height="330" rx="12" width="540" />
+        <g transform="translate(270, 165)">
+          <circle cx="0" cy="0" fill="none" r="100" stroke="#e2e8f0" strokeDasharray="4 4" strokeWidth="2" />
+          
+          {[
+            { color: '#cbd5e0', label: 'Transient', x: -100, y: 0 },
+            { color: '#f58220', label: 'Managed', x: 0, y: -100 },
+            { color: '#3182ce', label: 'Detached', x: 100, y: 0 },
+            { color: '#e53e3e', label: 'Removed', x: 0, y: 100 },
+          ].map((node) => (
+            <g key={node.label} transform={`translate(${node.x}, ${node.y})`}>
+              <circle fill={node.color} r="35" />
+              <text fill="#fff" fontSize="9" fontWeight="900" textAnchor="middle" y="4">{node.label}</text>
+            </g>
+          ))}
+          
+          {/* Arrows */}
+          <path d="M-65 -35 Q-50 -80 -15 -80" fill="none" stroke="#f58220" strokeWidth="2" />
+          <text fill="#f58220" fontSize="8" fontWeight="900" x="-70" y="-70">persist()</text>
+          
+          <path d="M15 -80 Q50 -80 65 -35" fill="none" stroke="#3182ce" strokeWidth="2" />
+          <text fill="#3182ce" fontSize="8" fontWeight="900" x="40" y="-70">detach()</text>
+        </g>
+      </svg>
+    )
+  }
+
+  if (type === 'exception-necessity') {
+    return (
+      <svg className={styles.deckVisual} viewBox="0 0 540 330">
+        <rect className={styles.svgBg} height="330" rx="12" width="540" />
+        
+        {/* Bad UX Side */}
+        <g transform="translate(40, 70)">
+          <rect fill="#fff" height="180" rx="8" stroke="#e53e3e" strokeWidth="2" width="210" />
+          <text fill="#e53e3e" fontSize="12" fontWeight="900" x="15" y="25">BAD UX (Raw Error)</text>
+          
+          <g transform="translate(25, 50)">
+            <rect fill="#fef2f2" height="100" rx="4" width="160" />
+            <text fill="#e53e3e" fontSize="40" fontWeight="900" textAnchor="middle" x="80" y="65">500</text>
+            <text fill="#c53030" fontSize="10" fontWeight="700" textAnchor="middle" x="80" y="85">Internal Server Error</text>
+          </g>
+          <text fill="#718096" fontSize="9" fontWeight="600" textAnchor="middle" x="105" y="170">사용자는 당황하고 떠납니다.</text>
+        </g>
+
+        {/* Arrow */}
+        <path d="M260 160 h20" fill="none" stroke="#cbd5e0" strokeWidth="2" />
+
+        {/* Good UX Side */}
+        <g transform="translate(290, 70)">
+          <rect fill="#fff" height="180" rx="8" stroke="#38a169" strokeWidth="2" width="210" />
+          <text fill="#38a169" fontSize="12" fontWeight="900" x="15" y="25">GOOD UX (Handled)</text>
+          
+          <g transform="translate(25, 50)">
+            <rect fill="#f0fff4" height="100" rx="4" width="160" />
+            <circle cx="80" cy="40" fill="#38a169" r="15" />
+            <path d="M72 40 l5 5 l10 -10" fill="none" stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
+            <text fill="#2f855a" fontSize="11" fontWeight="850" textAnchor="middle" x="80" y="75">아이디를 확인해주세요</text>
+            <text fill="#2f855a" fontSize="9" fontWeight="600" textAnchor="middle" x="80" y="90">친절한 안내 메세지</text>
+          </g>
+          <text fill="#718096" fontSize="9" fontWeight="600" textAnchor="middle" x="105" y="170">안정감 있는 서비스 경험</text>
+        </g>
+      </svg>
+    )
+  }
+
+  if (type === 'exception-flow') {
+    return (
+      <svg className={styles.deckVisual} viewBox="0 0 540 330">
+        <rect className={styles.svgBg} height="330" rx="12" width="540" />
+        <g transform="translate(40, 100)">
+          {/* Controller */}
+          <rect fill="#fff" height="60" rx="8" stroke="#e2e8f0" strokeWidth="2" width="100" />
+          <text fill="#2d3748" fontSize="11" fontWeight="800" textAnchor="middle" x="50" y="35">Controller</text>
+          
+          {/* Error throwing */}
+          <path d="M100 30 h80" fill="none" stroke="#e53e3e" strokeWidth="2" />
+          <circle cx="140" cy="30" fill="#e53e3e" r="8" />
+          <text fill="#e53e3e" fontSize="10" fontWeight="900" textAnchor="middle" x="140" y="52">EXCEPTION!</text>
+
+          {/* ControllerAdvice (The Net) */}
+          <g transform="translate(180, -20)">
+            <rect fill="#fff9f3" height="100" rx="8" stroke="#f58220" strokeWidth="3" width="140" />
+            <text fill="#9a4c0f" fontSize="11" fontWeight="900" textAnchor="middle" x="70" y="45">@ControllerAdvice</text>
+            <text fill="#c05621" fontSize="9" fontWeight="700" textAnchor="middle" x="70" y="65">Error Handler</text>
+          </g>
+
+          {/* Clean Response */}
+          <path d="M320 30 h80" fill="none" stroke="#38a169" strokeWidth="2" />
+          <rect fill="#f0fff4" height="40" rx="4" stroke="#38a169" width="80" x="400" y="10" />
+          <text fill="#2f855a" fontSize="9" fontWeight="800" textAnchor="middle" x="440" y="35">Clean JSON</text>
+        </g>
+      </svg>
+    )
+  }
+
+  if (type === 'jpa-persistence') {
+    return (
+      <svg className={styles.deckVisual} viewBox="0 0 540 330">
+        <rect className={styles.svgBg} height="330" rx="12" width="540" />
+        <g transform="translate(40, 60)">
+          {/* Java App */}
+          <rect fill="#fff" height="150" rx="8" stroke="#e2e8f0" strokeWidth="2" width="100" />
+          <text fill="#2d3748" fontSize="12" fontWeight="800" textAnchor="middle" x="50" y="75">Java App</text>
+          
+          {/* Persistence Context (The Buffer) */}
+          <g transform="translate(160, -20)">
+            <rect fill="#fff9f3" height="190" rx="12" stroke="#f58220" strokeWidth="3" width="140" />
+            <text fill="#9a4c0f" fontSize="12" fontWeight="900" textAnchor="middle" x="70" y="30">Persistence Context</text>
+            <rect fill="#fff" height="40" rx="4" width="100" x="20" y="50" />
+            <text fill="#f58220" fontSize="10" fontWeight="800" textAnchor="middle" x="70" y="75">1st Level Cache</text>
+            <text fill="#718096" fontSize="9" fontWeight="600" textAnchor="middle" x="70" y="110">Dirty Checking</text>
+            <text fill="#718096" fontSize="9" fontWeight="600" textAnchor="middle" x="70" y="130">Write Behind</text>
+          </g>
+
+          {/* Database */}
+          <g transform="translate(360, 0)">
+            <rect fill="#f8fafc" height="150" rx="8" stroke="#cbd5e0" strokeWidth="2" width="100" />
+            <text fill="#4a5568" fontSize="12" fontWeight="800" textAnchor="middle" x="50" y="75">Database</text>
+            <path d="M20 90 h60 M20 110 h60" fill="none" stroke="#cbd5e0" strokeWidth="2" />
+          </g>
+        </g>
+      </svg>
+    )
+  }
+
+  if (type === 'jpa-nplusone') {
+    return (
+      <svg className={styles.deckVisual} viewBox="0 0 540 330">
+        <rect className={styles.svgBg} height="330" rx="12" width="540" />
+        <g transform="translate(40, 60)">
+          {/* Main Select */}
+          <rect fill="#fff" height="40" rx="4" stroke="#3182ce" strokeWidth="2" width="140" />
+          <text fill="#3182ce" fontSize="11" fontWeight="900" textAnchor="middle" x="70" y="25">SELECT Teams (1)</text>
+          
+          {/* The N problems */}
+          <g transform="translate(200, 20)">
+            {[0, 40, 80, 120].map(i => (
+              <g key={i} transform={`translate(0, ${i})`}>
+                <path d="M-60 ${-i + 20} Q-30 20 0 20" fill="none" stroke="#e53e3e" strokeWidth="1.5" />
+                <rect fill="#fff" height="30" rx="4" stroke="#e53e3e" strokeWidth="1" width="180" />
+                <text fill="#e53e3e" fontSize="9" fontWeight="800" x="10" y="20">SELECT Members where team_id=? (N)</text>
+              </g>
+            ))}
+          </g>
+        </g>
+        <text fill="#e53e3e" fontSize="18" fontWeight="900" textAnchor="middle" x="270" y="40">N+1 문제: 1번 불렀는데 N번 더 조회함</text>
+      </svg>
+    )
+  }
+
   if (type === 'web-evolution') {
     return (
       <svg className={styles.deckVisual} viewBox="0 0 540 330">
