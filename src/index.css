@@ -22,6 +22,76 @@
   --transition-slow: 400ms var(--ease-out-expo);
 }
 
+/* Physics-based Cursor System */
+.cursor-system {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99999;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 12px;
+  height: 12px;
+}
+
+.cursor-ring {
+  width: 32px;
+  height: 32px;
+  transition: width 0.3s var(--ease-out-expo), height 0.3s var(--ease-out-expo);
+}
+
+.cursor-dot svg,
+.cursor-ring svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cursor-dot svg {
+  filter: drop-shadow(0 0 8px var(--lion));
+}
+
+.cursor-ring svg {
+  opacity: 0.6;
+}
+
+/* Hover States - Magnetic Feel */
+.is-pointer .cursor-ring {
+  width: 54px;
+  height: 54px;
+}
+
+.is-pointer .cursor-ring svg {
+  animation: cursorRotate 4s linear infinite;
+  opacity: 1;
+}
+
+@keyframes cursorRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Click Interaction */
+.is-clicked .cursor-dot {
+  transform: translate(-50%, -50%) scale(0.6) !important;
+}
+
+.is-clicked .cursor-ring {
+  width: 24px;
+  height: 24px;
+}
+
 @keyframes slideUpFade {
   from {
     opacity: 0;
@@ -169,12 +239,28 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: crosshair; /* Fallback */
+}
+
+/* Custom Cursor Logic - Hide default on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
 }
 
 body {
   min-width: 320px;
   margin: 0;
   caret-color: transparent;
+  overflow-x: hidden;
+}
+
+/* Performance Optimizations */
+.page-wrapper,
+.transition-overlay,
+.loading-tip-container {
+  will-change: transform, opacity;
 }
 
 ::selection {

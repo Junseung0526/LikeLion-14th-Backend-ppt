@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Library } from './components/Library'
 import { PresenterPage } from './components/PresenterPage'
 import { SlideDeck } from './components/SlideDeck'
@@ -66,6 +66,94 @@ function getRoute(): Route {
 
 function pushRoute(path: string) {
   window.location.hash = `/${path}`.replace(/\/+$/, '')
+}
+
+function CustomCursor() {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const [isPointer, setIsPointer] = useState(false)
+  const [isClicked, setIsClicked] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  
+  // Physics states
+  const dotPos = useRef({ x: 0, y: 0 })
+  const ringPos = useRef({ x: 0, y: 0 })
+  const requestRef = useRef<number>(null)
+
+  useEffect(() => {
+    const onMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY })
+      setIsVisible(true)
+      
+      const target = e.target as HTMLElement
+      setIsPointer(
+        window.getComputedStyle(target).cursor === 'pointer' ||
+        target.tagName === 'BUTTON' ||
+        target.tagName === 'A' ||
+        target.closest('button') !== null
+      )
+    }
+
+    const animate = () => {
+      // Smoothly move the dot
+      dotPos.current.x += (mousePos.x - dotPos.current.x) * 0.25
+      dotPos.current.y += (mousePos.y - dotPos.current.y) * 0.25
+      
+      // Ring follows with a bit more lag
+      ringPos.current.x += (mousePos.x - ringPos.current.x) * 0.12
+      ringPos.current.y += (mousePos.y - ringPos.current.y) * 0.12
+
+      const dotEl = document.getElementById('cursor-dot')
+      const ringEl = document.getElementById('cursor-ring')
+      
+      if (dotEl) {
+        dotEl.style.transform = `translate(-50%, -50%) translate3d(${dotPos.current.x}px, ${dotPos.current.y}px, 0)`
+      }
+      if (ringEl) {
+        ringEl.style.transform = `translate(-50%, -50%) translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0)`
+      }
+
+      requestRef.current = requestAnimationFrame(animate)
+    }
+
+    window.addEventListener('mousemove', onMouseMove)
+    const onMouseDown = () => setIsClicked(true)
+    const onMouseUp = () => setIsClicked(false)
+    const onMouseLeave = () => setIsVisible(false)
+    const onMouseEnter = () => setIsVisible(true)
+
+    window.addEventListener('mousedown', onMouseDown)
+    window.addEventListener('mouseup', onMouseUp)
+    document.addEventListener('mouseleave', onMouseLeave)
+    document.addEventListener('mouseenter', onMouseEnter)
+    
+    requestRef.current = requestAnimationFrame(animate)
+
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('mousedown', onMouseDown)
+      window.removeEventListener('mouseup', onMouseUp)
+      document.removeEventListener('mouseleave', onMouseLeave)
+      document.removeEventListener('mouseenter', onMouseEnter)
+      if (requestRef.current) cancelAnimationFrame(requestRef.current)
+    }
+  }, [mousePos])
+
+  if (!isVisible) return null
+
+  return (
+    <div className={`cursor-system ${isPointer ? 'is-pointer' : ''} ${isClicked ? 'is-clicked' : ''}`}>
+      <div id="cursor-ring" className="cursor-ring">
+        <svg viewBox="0 0 100 100">
+          <path d="M50 5L89 27.5V72.5L50 95L11 72.5V27.5L50 5Z" fill="none" stroke="var(--lion)" strokeWidth="2" />
+        </svg>
+      </div>
+      <div id="cursor-dot" className="cursor-dot">
+        <svg viewBox="0 0 100 100">
+          <path d="M50 5L89 27.5V72.5L50 95L11 72.5V27.5L50 5Z" fill="var(--lion)" />
+        </svg>
+      </div>
+    </div>
+  )
 }
 
 function App() {
@@ -196,6 +284,7 @@ function App() {
 
   return (
     <>
+      <CustomCursor />
       <div className={`page-wrapper ${isTransitioning ? 'page-exit' : 'page-enter'}`}>
         {renderContent()}
       </div>
